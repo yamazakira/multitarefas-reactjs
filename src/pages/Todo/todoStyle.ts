@@ -24,10 +24,6 @@ export const TodoInputText = styled.input`
     height: 4dvh;
     border: none;
     padding: 5px;
-    &::placeholder,
-    ::-webkit-input-placeholder {
-        color: #243e36;
-    }
     color: #243e36;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -81,5 +77,12 @@ export const TodoItem = styled.li.attrs(props => ({
     width: 100%;
     margin-top: 0.5dvh;
     text-align: left;
+`;
+
+export const TodoItemWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
     border-radius: 7px;
+    overflow: hidden;
 `;

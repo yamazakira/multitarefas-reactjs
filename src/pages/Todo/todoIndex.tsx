@@ -3,16 +3,21 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import * as S from "./todoStyle.ts"
 
-const TodoItem = ({ tarefa, completar }) => {
+const TodoItem = ({ tarefa, completar, deletar }) => {
   return (
-    <S.TodoItem
-      className={`${tarefa.completo ? "completo" : ""}`}
-      onClick={() => completar(tarefa.id)}
-    >
-      <S.TodoItemText>
-        {tarefa.tarefa}
-      </S.TodoItemText>
-    </S.TodoItem>
+
+    <S.TodoItemWrapper>
+      <S.TodoItem
+        className={`${tarefa.completo ? "completo" : ""}`}
+        onClick={() => completar(tarefa.id)}
+      >
+        <S.TodoItemText>
+          {tarefa.tarefa}
+        </S.TodoItemText>
+      </S.TodoItem>
+      <button
+        onClick={() => deletar(tarefa.id)}>Remover</button>
+    </S.TodoItemWrapper>
   )
 }
 
@@ -36,7 +41,10 @@ export const Todo = () => {
     setListaTodos(listaTodos.map(todo => todo.id === id ? { ...todo, completo: !todo.completo } : todo))
 
   }
-
+  const deletar = (id) => {
+    console.log(listaTodos.filter(todo => todo.id !== id))
+    setListaTodos(listaTodos.filter(todo => todo.id !== id))
+  }
   return (
 
     <S.TodoWrapper>
@@ -63,7 +71,11 @@ export const Todo = () => {
 
         <S.TodoItemList>
           {listaTodos.map((todo, index) => (
-            <TodoItem tarefa={todo} key={index} completar={completar} />
+            <TodoItem
+              tarefa={todo}
+              key={index}
+              completar={completar}
+              deletar={deletar} />
           ))}
         </S.TodoItemList>
 
